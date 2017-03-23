@@ -17,12 +17,11 @@ Read the Docs Sphinx Theme
 
 View a working demo_ over on readthedocs.org_.
 
-This is a mobile-friendly sphinx_ theme I made for readthedocs.org_. It's
-currently in development there and includes some rtd variable checks that can be ignored
-if you're just trying to use it on your project outside of that site.
+This is a mobile-friendly sphinx_ theme I made for readthedocs.org_.
 
-**This repo also exists as a submodule within the readthedocs itself**, so please make your edits to
-the SASS files here, rather than the .css files on RTD.
+If you'd like to update the theme,
+please make your edits to the SASS files here,
+rather than the .css files on checked into the repo.
 
 .. image:: screen_mobile.png
     :width: 100%
@@ -48,6 +47,15 @@ In your ``conf.py`` file:
     html_theme = "sphinx_rtd_theme"
 
     html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+You may also specify a canonical url in conf.py to let search engines know
+they should give higher ranking to latest version of the docs:
+
+.. code:: python
+
+    html_theme_options['canonical_url'] = 'http://domain.tld/latest/docs/'
+
+The url points to the root of the documentation. It requires a trailing slash.
 
 Via git or download
 -------------------
@@ -89,9 +97,55 @@ You can currently add the following:
 
 * ``:github_url:`` This will force the "Edit on GitHub" to the configured URL
 * ``:bitbucket_url:`` This will force the "Edit on Bitbucket" to the configured URL
+* ``:gitlab_url:`` This will force the "Edit on GitLab" to the configured URL
 
 Changelog
 =========
+
+master
+------
+
+* Include fontawesome-webfont.woff2 in pip package
+* Updated wyrm_ and Font Awesome
+* Split multiple data types on different lines
+* Italicize ``.versionmodified``
+* Fix line number spacing to align with the code lines
+* Hide Edit links on auto created pages
+* Align ``.. centered::`` text to the center
+* Increase contrast for footnotes
+* Add language to the JS output variable 
+
+v0.2.4
+------
+
+* Yet another patch to deal with extra builders outside Spinx, such as the
+  singlehtml builders from the Read the Docs Sphinx extension
+
+v0.2.3
+------
+
+* Temporarily patch Sphinx issue with ``singlehtml`` builder by inspecting the
+  builder in template.
+
+v0.2.2
+------
+
+* Roll back toctree fix in 0.2.1 (#367). This didn't fix the issue and
+  introduced another bug with toctrees display.
+
+v0.2.1
+------
+
+* Add the ``rel`` HTML attribute to the footer links which point to
+  the previous and next pages.
+* Fix toctree issue caused by Sphinx singlehtml builder (#367)
+
+v0.2.0
+------
+
+* Adds the ``comments`` block after the ``body`` block in the template
+* Added "Edit on GitLab" support
+* Many bug fixes
 
 v0.1.10-alpha
 -------------
@@ -102,6 +156,9 @@ v0.1.10-alpha
 * Removes Sphinx dependency
 * Fixes hamburger on mobile display
 * Adds a ``body_begin`` block to the template
+* Add ``prev_next_buttons_location`` which can take the value ``bottom``,
+  ``top``, ``both`` , ``None`` and will display the "Next" and "Previous"
+  buttons accordingly
 
 v0.1.9
 ------
@@ -243,4 +300,5 @@ you can add something like this to your config. Thanks to Daniel Oaks for this.
 
 TODO
 ====
+
 * Separate some sass variables at the theme level so you can overwrite some basic colors.
